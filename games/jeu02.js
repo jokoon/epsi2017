@@ -65,6 +65,32 @@
         var ygoal_cpu=310;
         var t_rest_cpu=0;
         var player_clicked=0; //joueur qui a cliqué
+
+        //my random function
+		  function my_random() {
+			var xrand = Math.sin(random_seed++) * 10000;
+			return xrand - Math.floor(xrand);
+          }
+          
+        //poste le score
+        function post_score(my_score){
+            URL_POST=URL_POST_SCORE+"&score="+my_score;
+            alert("POST:"+URL_POST);
+            var oReq = new XMLHttpRequest();
+            oReq.addEventListener("load", callbackscore);
+            oReq.open("GET", URL_POST);
+            oReq.send();
+        }
+        //callback score
+        function callbackscore(){
+            alert("callback:"+this.responseText);
+            setTimeout(leave_page,3000)
+        }
+        //change de page
+        function leave_page(){
+            alert("quitte la page au bout de 3s");
+            location.replace(URL_END);
+        }
         
         //classe des blocks
        function block(xx,yy,color){
@@ -154,8 +180,8 @@
           this.id=id_current_explosion;                    
           this.x=x;
           this.y=y;
-          this.vx=4*(Math.random()-Math.random());
-          this.vy=4*(Math.random()-Math.random());
+          this.vx=4*(my_random()-my_random());
+          this.vy=4*(my_random()-my_random());
           this.image=new Image();
           this.image.src="block/particle.png";
           this.alive=1;         
@@ -185,8 +211,8 @@
           this.alpha=1;
           this.move= function () {               
                 //monte
-                this.x+=Math.random()-Math.random();
-                this.v=this.v-Math.random()*0.2;              
+                this.x+=my_random()-my_random();
+                this.v=this.v-my_random()*0.2;              
                 this.y+=this.v;
                 //se dissipe                
                 this.alpha-=0.01;
@@ -286,7 +312,7 @@
                    }                
                    //insère de nouveaux blocs en haut
                    for (var j = 0; j < cell_insert[i]; j++) {
-                       color=Math.round(Math.random()*color_max);
+                       color=Math.round(my_random()*color_max);
                        nbb++;
                        ide=used_blocks[nbb];
                        blocks[ide].phase="tombe";
@@ -336,7 +362,7 @@
 				img_board_start.src="block/message_start.png";
                 for(i=0;i<nx;i++){
                      for(j=0;j<ny;j++){
-                        color=Math.round(Math.random()*color_max);
+                        color=Math.round(my_random()*color_max);
                         blocks.push(new block(i,-2-2*j,color));
                      }
                 }
@@ -424,9 +450,11 @@
 						}
 						//verifie si ce n'est pas la fin du jeu
 						if (score[0]>1000) {
-							//win
+                            //win
+                            post_score(score[0]);
 							phase_jeu="wait";
 						}else if (score[1]>1000) {
+                            post_score(0);
 							phase_jeu="wait";
 						}
             
@@ -610,12 +638,12 @@
 			//trois fois sur quatre
             //parmis les cellules rapportant le plus de points en choisit une au hasard
 			//sinon choisit une cellule au hasard
-			if (Math.random()<0.75) {
-                nrand=Math.floor(Math.random()*possible_cells.length);
+			if (my_random()<0.75) {
+                nrand=Math.floor(my_random()*possible_cells.length);
                 console.log("cellule choisie pour "+String(pts_max)+" point(s) : ["+String(possible_cells[nrand][0])+","+String(possible_cells[nrand][1])+"]");
 				my_cell=possible_cells[nrand];
             }else{
-				my_cell=[Math.floor(Math.random()*nx),Math.floor(Math.random()*ny)];
+				my_cell=[Math.floor(my_random()*nx),Math.floor(my_random()*ny)];
 				console.log("cellule choisie au hasard");
 			}            
             return my_cell;
@@ -626,8 +654,8 @@
             playing_cpu=1;            
             x_cpu_cursor=310;
             y_cpu_cursor=310;
-            vx_cpu_cursor=-Math.random()*30;
-            vy_cpu_cursor=-Math.random()*30;
+            vx_cpu_cursor=-my_random()*30;
+            vy_cpu_cursor=-my_random()*30;
             //choix aléatoire d'une cellule à cliquer
             phase_cpu="reach";
             cell_choosen=CPU_choice();
