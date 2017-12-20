@@ -85,10 +85,12 @@
 			var xrand = Math.sin(random_seed++) * 10000;
 			return xrand - Math.floor(xrand);
 		  }
-        //poste le score
-        function post_score(my_score){
+         //poste le score
+         function post_score(my_score){
             URL_POST=URL_POST_SCORE+"&score="+my_score;
-            alert("POST:"+URL_POST);
+            if(MODE_DEBUG==1){
+               alert("POST:"+URL_POST);
+            }
             var oReq = new XMLHttpRequest();
             oReq.addEventListener("load", callbackscore);
             oReq.open("GET", URL_POST);
@@ -96,12 +98,16 @@
         }
         //callback score
         function callbackscore(){
-            alert("callback:"+this.responseText);
-            setTimeout(leave_page,3000)
+            if(MODE_DEBUG==1){
+                alert("callback:"+this.responseText);
+            }
+            setTimeout(leave_page,3000);
         }
         //change de page
         function leave_page(){
-            alert("quitte la page au bout de 3s");
+            if(MODE_DEBUG==1){
+                alert("quitte la page au bout de 3s");
+            }
             location.replace(URL_END);
         }
        //classe de la balle
