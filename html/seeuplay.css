@@ -1,0 +1,29 @@
+*{
+    margin:0;
+    padding:0;
+}
+
+#img_home{
+    margin:0;
+    padding:0;
+}
+
+#pres_login{
+    display:inline-block;
+    position: relative;
+    width:400px;
+    height:250px;
+    background-color: orange;
+    border-radius: 20px;
+    margin-top: 0;
+    padding-top: 0;
+}
+
+.pres_jeux{
+    margin:0 auto;
+    width:90%;
+}
+
+.img_jeu{
+    display:inline-block;
+}
