@@ -7,18 +7,20 @@
     margin:0;
     padding:0;
 }
-
-#pres_login{
+#form01{
     display:inline-block;
-    position: relative;
-    width:400px;
-    height:250px;
-    background-color: orange;
-    border-radius: 20px;
-    margin-top: 0;
-    padding-top: 0;
+    position: absolute;
+    padding:20px;
+    top:0;
+    right:0;
+    border-radius:20px;
+    background-color:rgba(255, 162, 0, 0.432);
+    width:24%;
 }
 
+.field01{
+    width:100px;
+}
 .pres_jeux{
     margin:0 auto;
     width:90%;
@@ -26,4 +28,11 @@
 
 .img_jeu{
     display:inline-block;
+    width:24%;
+}
+.img_jeu2{
+    width:100%;
+}
+.bt_jeux{
+    width:32%;
 }
