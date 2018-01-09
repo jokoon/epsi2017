@@ -1,116 +1,28 @@
--- phpMyAdmin SQL Dump
--- version 4.7.0
--- https://www.phpmyadmin.net/
+-- -------------------------------------------------------------------------------------------------------------------
+-- table : SCORES 
+-- -------------------------------------------------------------------------------------------------------------------
+select * from scores;
+-- ==========================================================
+-- DELETE scores
 --
--- Host: 127.0.0.1
--- Generation Time: Dec 11, 2017 at 12:11 PM
--- Server version: 5.7.17
--- PHP Version: 5.6.30
-
-/*
-----------------------------------------------------------------------------------------------------------------------------------
-Pour résumer sur le choix entre InnoDB et MyISAM :
---------------------------------------------------------
-MyISAM : à privilégier lorsqu’il est surtout nécessaire d’effectuer des requêtes pour lire ou insérer des données. 
-Pour des sites web, c’est souvent la solution recommandée.
-MyISAM restera quant à lui le meilleur choix dans le cas où l'on fait principalement des requêtes de lecture ou d'insertion.
-
-InnoDB : à privilégier pour les systèmes qui ne doivent pas comporter d’erreurs et qui nécessite des clés étrangères. 
-Pour une application gérant des données importantes, tel une application bancaire, 
-cela peut se révéler le moteur de stcokage recommandé.
-Pour conclure, on optera pour InnoDB principalement lorsque l'on utilisera un système d'information 
-qui n'admet pas les erreurs ou qui doit utiliser des clés étrangères ou des intégrités référentielles.
-----------------------------------------------------------------------------------------------------------------------------------
-*/
-
-
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
-SET time_zone = "+00:00";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
-
-
--- --------------------------------------------------------
+-- DELETE FROM table_name WHERE some_column = some_value 
 --
--- Database: `bicgame`
---
--- --------------------------------------------------------
+-- VIDER UNE TABLE
+-- TRUNCATE TABLE `ma_table`
+-- ..........................................................
+DELETE FROM scores where id = 1;
+TRUNCATE TABLE `scores`;
 
-DROP DATABASE IF EXISTS `bicgame`;
-CREATE DATABASE IF NOT EXISTS `bicgame`;
-USE `bicgame`;
+-- SELECT *  FROM nom_table WHERE condition GROUP BY champ1, champ2 HAVING groupe condition ORDER BY champ LIMIT limite, taille;
+-- ..........................................................
+DELETE FROM scores WHERE 
+SELECT MAX(score), dat_score, id_user, id_game FROM scrores WHERE condition GROUP BY id_user, id_game;
+-- ..........................................................
 
-
--- --------------------------------------------------------
--- DROP TABLE IF EXISTS `challenges`;
--- --------------------------------------------------------
-
-
--- --------------------------------------------------------
---
--- Table structure for table `challenges`
---
--- --------------------------------------------------------
-
-CREATE TABLE `challenges` (
-  `id` int(11) NOT NULL,
-  `id_user1` int(11) NOT NULL,
-  `id_user2` int(11) NOT NULL,
-  `seed` int(11) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 COMMENT='Tables des défis';
-
--- --------------------------------------------------------
-
---
--- Table structure for table `games`
---
-
-CREATE TABLE `games` (
-  `id` int(11) NOT NULL,
-  `name_game` varchar(32) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 COMMENT='Tables des jeux';
-
---
--- Dumping data for table `users`
---
-
-INSERT INTO games (id, name_game) VALUES (1, 'THE ISLAND ');
-INSERT INTO games (id, name_game) VALUES (2, 'BLOCKED');
-INSERT INTO games (id, name_game) VALUES (3, 'CHAIN REACTION');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `high_scores`
---
-
-CREATE TABLE `high_scores` (
-  `id_score` int(11) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 COMMENT='Tables des meilleurs scores';
-
--- --------------------------------------------------------
-
---
--- Table structure for table `scores`
---
-
-CREATE TABLE `scores` (
-  `id` int(11) NOT NULL,
-  `id_game` int(11) NOT NULL,
-  `id_user` int(11) NOT NULL,
-  `dat_score` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `score` int(11) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `users`
---
+-- ==========================================================
+-- CREATE scores
+-- ..........................................................
+INSERT INTO scores (id, id_game, id_user, dat_score, score) VALUES (0, 0, 0, );
 
 INSERT INTO scores (id, id_game, id_user, dat_score, score) VALUES ( 1, 1, 1, '2017-12-22 11:01:02', 23);
 INSERT INTO scores (id, id_game, id_user, dat_score, score) VALUES ( 2, 2, 2, '2017-12-22 11:01:02', 5);
@@ -1202,137 +1114,4 @@ INSERT INTO scores (id, id_game, id_user, dat_score, score) VALUES ( 1087, 1, 39
 INSERT INTO scores (id, id_game, id_user, dat_score, score) VALUES ( 1088, 2, 40, '2017-12-22 11:01:03', 29);
 INSERT INTO scores (id, id_game, id_user, dat_score, score) VALUES ( 1089, 3, 41, '2017-12-22 11:01:03', 11);
 
--- --------------------------------------------------------
-
---
--- Table structure for table `tokens`
---
-
-CREATE TABLE `tokens` (
-  `token` varchar(256) NOT NULL,
-  `id_user` int(11) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 COMMENT='Table des tokens';
-
--- --------------------------------------------------------
-
---
--- Table structure for table `users`
---
-
-CREATE TABLE `users` (
-  `id` int(11) NOT NULL,
-  `u_name` varchar(64) NOT NULL,
-  `email` varchar(128) NOT NULL,
-  `experience` int(11) NOT NULL DEFAULT '0',
-  `active` tinyint(1) NOT NULL DEFAULT '0',
-  `pwd` varchar(256) NOT NULL,
-  `can_change_name` tinyint(1) NOT NULL DEFAULT '0' 
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 COMMENT='Table des joueurs';
-
---
--- Dumping data for table `users`
---
-INSERT INTO users (id, u_name, email, experience, active, pwd, can_change_name) VALUES (1, 'admin', 'admin@boite-email.com', 0, 1, '', 0);
-INSERT INTO users (id, u_name, email, experience, active, pwd, can_change_name) VALUES (2, 'jonas', 'smth@pouet.com', 1500, 1, '7ed8eda08e2d4a11a5459cc3453f54171591c0a39a113eaacc1f421deb5a9792', 0);
-INSERT INTO users (id, u_name, email, experience, active, pwd, can_change_name) VALUES (3, 'kristoph', 'kristoph@boite-email.com', 52, 1,'', 0);
-INSERT INTO users (id, u_name, email, experience, active, pwd, can_change_name) VALUES (4, 'patrick', 'patrick@boite-email.com', 9532, 1,'', 0);
-INSERT INTO users (id, u_name, email, experience, active, pwd, can_change_name) VALUES (5, 'marc', 'marc@boite-email.com', 100, 1,'', 0);
-INSERT INTO users (id, u_name, email, experience, active, pwd, can_change_name) VALUES (6, 'emmanuelle', 'emmanuelle@boite-email.com', 50, 1,'', 0);
-INSERT INTO users (id, u_name, email, experience, active, pwd, can_change_name) VALUES (7, 'morgan', 'email_user@boite-email.com', 980, 1,'', 0);
-INSERT INTO users (id, u_name, email, experience, active, pwd, can_change_name) VALUES (8, 'nicolas', 'morgan@boite-email.com', 45, 1,'', 0);
-INSERT INTO users (id, u_name, email, experience, active, pwd, can_change_name) VALUES (9, 'wafa', 'wafa@boite-email.com', 20, 1,'', 0);
-INSERT INTO users (id, u_name, email, experience, active, pwd, can_change_name) VALUES (10, 'valerie', 'valerie@boite-email.com', 772, 1,'', 1);
-INSERT INTO users (id, u_name, email, experience, active, pwd, can_change_name) VALUES (11, 'jb', 'jb@boite-email.com', 1025, 1,'', 0);
-INSERT INTO users (id, u_name, email, experience, active, pwd, can_change_name) VALUES (12, 'romain', 'romain@boite-email.com', 315, 1,'', 0);
-INSERT INTO users (id, u_name, email, experience, active, pwd, can_change_name) VALUES (13, 'maxime', 'maxime@boite-email.com', 330, 1,'', 0);
-INSERT INTO users (id, u_name, email, experience, active, pwd, can_change_name) VALUES (14, 'sylvie', 'sylvie@boite-email.com', 15, 1,'', 0);
-INSERT INTO users (id, u_name, email, experience, active, pwd, can_change_name) VALUES (15, 'mohamed', 'mohamed@boite-email.com', 146, 1,'', 0);
-INSERT INTO users (id, u_name, email, experience, active, pwd, can_change_name) VALUES (16, 'nicolas2', 'nicolas2@boite-email.com', 774, 1,'', 0);
-INSERT INTO users (id, u_name, email, experience, active, pwd, can_change_name) VALUES (17, 'christophe', 'christophe@boite-email.com', 12, 1,'', 0);
-INSERT INTO users (id, u_name, email, experience, active, pwd, can_change_name) VALUES (18, 'pierre', 'pierre@boite-email.com', 3200, 1,'', 0);
-INSERT INTO users (id, u_name, email, experience, active, pwd, can_change_name) VALUES (19, 'paul', 'paul@boite-email.com', 3, 1,'', 0);
-INSERT INTO users (id, u_name, email, experience, active, pwd, can_change_name) VALUES (20, 'jacques', 'jacques@boite-email.com', 9, 1,'', 1);
-INSERT INTO users (id, u_name, email, experience, active, pwd, can_change_name) VALUES (21, 'ploufplouf', 'poufpouf@boite-email.com', 1963, 1,'', 0);
-INSERT INTO users (id, u_name, email, experience, active, pwd, can_change_name) VALUES (22, 'tagada', 'tagada@boite-email.com', 54, 1,'', 0);
-INSERT INTO users (id, u_name, email, experience, active, pwd, can_change_name) VALUES (23, 'pifpaf', 'pifpaf@boite-email.com', 39, 1,'', 0);
-INSERT INTO users (id, u_name, email, experience, active, pwd, can_change_name) VALUES (24, 'pinson', 'pinson@boite-email.com', 123, 1,'', 0);
-INSERT INTO users (id, u_name, email, experience, active, pwd, can_change_name) VALUES (25, 'joris', 'joris@boite-email.com', 456, 1,'', 0);
-INSERT INTO users (id, u_name, email, experience, active, pwd, can_change_name) VALUES (26, 'dieu', 'dieu@boite-email.com', 789, 1,'', 0);
-INSERT INTO users (id, u_name, email, experience, active, pwd, can_change_name) VALUES (27, 'devil', 'devil@boite-email.com', 147, 1,'', 0);
-INSERT INTO users (id, u_name, email, experience, active, pwd, can_change_name) VALUES (28, 'sainte', 'sainte@boite-email.com', 258, 1,'', 0);
-INSERT INTO users (id, u_name, email, experience, active, pwd, can_change_name) VALUES (29, 'nitouch', 'nitouch@boite-email.com', 369, 0,'', 0);
-INSERT INTO users (id, u_name, email, experience, active, pwd, can_change_name) VALUES (30, 'poil', 'poil@boite-email.com', 753, 1,'', 1);
-INSERT INTO users (id, u_name, email, experience, active, pwd, can_change_name) VALUES (31, 'ooo', 'ooo@boite-email.com', 951, 1,'', 0);
-INSERT INTO users (id, u_name, email, experience, active, pwd, can_change_name) VALUES (32, 'nez', 'nez@boite-email.com', 357, 1,'', 0);
-INSERT INTO users (id, u_name, email, experience, active, pwd, can_change_name) VALUES (33, 'un', 'un@boite-email.com', 159, 1,'', 0);
-INSERT INTO users (id, u_name, email, experience, active, pwd, can_change_name) VALUES (34, 'poussin', 'poussin@boite-email.com', 751, 1,'', 0);
-INSERT INTO users (id, u_name, email, experience, active, pwd, can_change_name) VALUES (35, 'egale', 'egale@boite-email.com', 359, 1,'', 0);
-INSERT INTO users (id, u_name, email, experience, active, pwd, can_change_name) VALUES (36, 'deux', 'deux@boite-email.com', 759, 1,'', 0);
-INSERT INTO users (id, u_name, email, experience, active, pwd, can_change_name) VALUES (37, 'colloc', 'colloc@boite-email.com', 351, 1,'', 0);
-INSERT INTO users (id, u_name, email, experience, active, pwd, can_change_name) VALUES (38, 'cool', 'cool@boite-email.com', 349, 1,'', 0);
-INSERT INTO users (id, u_name, email, experience, active, pwd, can_change_name) VALUES (39, 'coquille', 'coquille@boite-email.com', 183, 1,'', 0);
-INSERT INTO users (id, u_name, email, experience, active, pwd, can_change_name) VALUES (40, 'calimero', 'calimero@boite-email.com', 167, 1,'', 1);
-INSERT INTO users (id, u_name, email, experience, active, pwd, can_change_name) VALUES (41, 'sans', 'sans@boite-email.com', 1, 1,'', 1);
-INSERT INTO users (id, u_name, email, experience, active, pwd, can_change_name) VALUES (42, 'chemisse', 'chemisse@boite-email.com', 2, 1,'', 1);
-INSERT INTO users (id, u_name, email, experience, active, pwd, can_change_name) VALUES (43, 'bi', 'bi@boite-email.com', 3, 1,'', 1);
-INSERT INTO users (id, u_name, email, experience, active, pwd, can_change_name) VALUES (44, 'gleux', 'gleux@boite-email.com', 4, 1,'', 1);
-INSERT INTO users (id, u_name, email, experience, active, pwd, can_change_name) VALUES (45, 'moutarde', '@boite-email.com', 5, 1,'', 1);
-INSERT INTO users (id, u_name, email, experience, active, pwd, can_change_name) VALUES (46, 'deux', 'deux@boite-email.com', 6, 1,'', 1);
-INSERT INTO users (id, u_name, email, experience, active, pwd, can_change_name) VALUES (47, 'maux', 'maux@boite-email.com', 7, 1,'', 1);
-INSERT INTO users (id, u_name, email, experience, active, pwd, can_change_name) VALUES (48, 'see', 'see@boite-email.com', 8, 1,'', 1);
-INSERT INTO users (id, u_name, email, experience, active, pwd, can_change_name) VALUES (49, 'you', 'you@boite-email.com', 9, 1,'', 1);
-INSERT INTO users (id, u_name, email, experience, active, pwd, can_change_name) VALUES (50, 'play', 'play@boite-email.com', 0, 0,'',1);
-
---
--- Indexes for dumped tables
---
-
---
--- Indexes for table `challenges`
---
-ALTER TABLE `challenges` ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `games`
---
-ALTER TABLE `games` ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `scores`
---
-ALTER TABLE `scores` ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `tokens`
---
-ALTER TABLE `tokens` ADD PRIMARY KEY (`token`);
-
---
--- Indexes for table `users`
---
-ALTER TABLE `users` ADD PRIMARY KEY (`id`);
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `challenges`
---
-ALTER TABLE `challenges` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `games`
---
-ALTER TABLE `games` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `scores`
---
-ALTER TABLE `scores` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `users`
---
-ALTER TABLE `users` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;COMMIT;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+-- ..........................................................
