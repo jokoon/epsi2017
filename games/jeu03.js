@@ -78,7 +78,38 @@
         var t_rest_cpu=0;
         var player_clicked=0; //joueur qui a cliqué
         var networks=[];
-        
+        var postedscore=0;
+
+        //my random function
+		  function my_random() {
+			var xrand = Math.sin(random_seed++) * 10000;
+			return xrand - Math.floor(xrand);
+		  }
+         //poste le score
+         function post_score(my_score){
+            URL_POST=URL_POST_SCORE+"&score="+my_score;
+            if(MODE_DEBUG==1){
+               alert("POST:"+URL_POST);
+            }
+            var oReq = new XMLHttpRequest();
+            oReq.addEventListener("load", callbackscore);
+            oReq.open("GET", URL_POST);
+            oReq.send();
+        }
+        //callback score
+        function callbackscore(){
+            if(MODE_DEBUG==1){
+                alert("callback:"+this.responseText);
+            }
+            setTimeout(leave_page,3000);
+        }
+        //change de page
+        function leave_page(){
+            if(MODE_DEBUG==1){
+                alert("quitte la page au bout de 3s");
+            }
+            location.replace(URL_END);
+        }
        //classe de la balle
        function ball(){
           id_current_ball++;
@@ -86,13 +117,13 @@
           this.alive=1;
           this.img = new Image();
           this.img.src = 'img/ball.png';          
-          this.x=Math.random()*xmax;
-          this.y=Math.random()*ymax;
+          this.x=my_random()*xmax;
+          this.y=my_random()*ymax;
           this.xcell=Math.floor(dn*this.x/zone_width);
           this.ycell=Math.floor(dn*this.y/zone_height);
           cell[this.xcell][this.ycell].push(this.id);
-          this.vx=(Math.random()-Math.random())*4;
-          this.vy=(Math.random()-Math.random())*4;
+          this.vx=(my_random()-my_random())*4;
+          this.vy=(my_random()-my_random())*4;
           this.id_network=-1;
           this.explode= function (points) {
             this.alive=0;
@@ -519,8 +550,8 @@
 							//reinjecte les balles en ouvrant le vortex
 							vortex.mode=1;
 							vortex.r=0;
-							vortex.x=25+Math.random()*250;
-							vortex.y=25+Math.random()*250;
+							vortex.x=25+my_random()*250;
+							vortex.y=25+my_random()*250;
 						}
 					}
                     render_game();
@@ -584,9 +615,9 @@
                         balls[i].vx+=vx/v*0.1;
                         balls[i].vy+=vy/v*0.1;
                     }else{                    
-                        if (Math.random()<0.05) {
+                        if (my_random()<0.05) {
                           //la balle morte réapparait et est ejectée
-                          ang=Math.random()*360*deg;
+                          ang=my_random()*360*deg;
                           balls[i].x=vortex.x+7*Math.cos(ang);
                           balls[i].y=vortex.y+7*Math.sin(ang);
                           balls[i].xcell=Math.floor(dn*balls[i].x/zone_width);
@@ -641,7 +672,7 @@
                                 }
                             }
                             //choix d'une balle au hasard dans le réseau selectionné
-                            rnd=Math.floor(Math.random()*networks[chosen_net].length);
+                            rnd=Math.floor(my_random()*networks[chosen_net].length);
                             id_chosen=networks[chosen_net][rnd];                            
                             xgoal_cpu=balls[id_chosen].x;
                             ygoal_cpu=balls[id_chosen].y;                    
@@ -838,9 +869,18 @@
             if (score[0]>2000) {
                 //win
                 ctx.drawImage(img_board_win,22,30,256,192);
+                if(postedscore==0){
+                    post_score(score[0]);
+                    postedscore=1;
+                }
+                
             }else if (score[1]>2000) {
                 //lose
                 ctx.drawImage(img_board_lose,22,30,256,192);
+                if(postedscore==0){
+                    post_score(0);
+                    postedscore=1;
+                }
             }
           }
           //render from hidden canvas to the visible one

@@ -126,15 +126,38 @@
           var tlastdecision=0;
 		  //sounds
 		  var snd_loop=null;
-		  //random seed
-		  var random_seed = Math.floor(Math.random()*500000);
+		  
 		  
 		  //my random function
 		  function my_random() {
 			var xrand = Math.sin(random_seed++) * 10000;
 			return xrand - Math.floor(xrand);
 		  }
-         
+         //poste le score
+        function post_score(my_score){
+            URL_POST=URL_POST_SCORE+"&score="+my_score;
+            if(MODE_DEBUG==1){
+               alert("POST:"+URL_POST);
+            }
+            var oReq = new XMLHttpRequest();
+            oReq.addEventListener("load", callbackscore);
+            oReq.open("GET", URL_POST);
+            oReq.send();
+        }
+        //callback score
+        function callbackscore(){
+            if(MODE_DEBUG==1){
+                alert("callback:"+this.responseText);
+            }
+            setTimeout(leave_page,3000);
+        }
+        //change de page
+        function leave_page(){
+            if(MODE_DEBUG==1){
+                alert("quitte la page au bout de 3s");
+            }
+            location.replace(URL_END);
+        }
          //class of the characters
          function  character(id,x,y,team) {
              this.id=id;
@@ -1974,6 +1997,7 @@
 				snd_loop.stop();
 				createjs.Sound.play("loose");
                 img_message.src="island/message_draw.png";
+                post_score(0);
                 init_message();
             }else if(nb_char_alive[0]==0){
                 //defeat
@@ -1981,12 +2005,14 @@
 				snd_loop.stop();
 				createjs.Sound.play("loose");
                 img_message.src="island/message_defeat.png";
+                post_score(0);
                 init_message();
             }else if(nb_char_alive[1]==0){
                 //victory
 				snd_loop.stop();
 				createjs.Sound.play("win");
                 img_message.src="island/message_victory.png";
+                post_score(score);
                 init_message();
             }else{
                 //the game continues
