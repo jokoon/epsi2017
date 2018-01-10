@@ -1,7 +1,7 @@
 <!-- <a href=".">header</a> -->
 <?php
 
-$bdd = new PDO('mysql:host=localhost:3306;dbname=bicgame', 'root', '');
+// $bdd = new PDO('mysql:host=localhost:3306;dbname=bicgame', 'root', '');
 //echo $reponse;
 
 include('utilities.php');

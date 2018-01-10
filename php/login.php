@@ -16,7 +16,8 @@
 	if(isset($_POST['password']) and isset($_POST['login']))
 	{
 		$h = hash('sha256', $_POST['password']);
-		$bdd = new PDO('mysql:host=localhost;dbname=bicgame', 'root', '', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+		// $bdd = new PDO('mysql:host=localhost;dbname=bicgame', 'root', '', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+		$bdd = new PDO('mysql:host=mysql.montpellier.epsi.fr:3306;dbname=bicgame', 'jonas.orinovski', 'bicgame', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
 		try
 		{
 			$reponse = $bdd->query('SELECT * FROM users WHERE name = \''.$_POST['login'].'\'');
