@@ -1,0 +1,10 @@
+RULES
+
+1) The Island
+You have to defeat the red team to score points. In order to win you have to use the weapons to throw all your enemies into the sea.
+
+2) Blocked
+You should defeat the CPU to validate your score. Click on the biggest areas. The first to reach 1000 points is the winner.
+
+3) Chain Reaction
+You should defeat the CPU to validate your score. Create the bigger chain reactions. The first to reach 2000 points is the winner.
