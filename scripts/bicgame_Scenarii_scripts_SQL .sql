@@ -115,22 +115,25 @@ INSERT INTO scores (id_game, id_user, dat_score, score) VALUES (0, 0, now(), 0);
 	UPDATE : 
 		- Cas 'Invitation à un défi' : l'utilisateur peut s'il le désire modifier son pseudonyme si cela n'a jamais été réalisé auparavant, ensuite le champ de vérification prendra la valeur false
         - Cas normal : Toutes les valeurs des champs de la table sont modifiées exception pour le champ du pseudonyme (u_name)
+        - Mise à jour de l'expérience
         
-	DELETE : Aucune suppression de compte utilisateur n'est prévue.
+	DELETE : NON
     
-    DÉSACTIVATION de compte utilisateur : Aucune désactivation de compte utilisateur n'est prévue.
+    DÉSACTIVATION de compte utilisateur : NON
     
 */
 -- -----------------------------------------------------------------------------------------------------------------------------
 SELECT * FROM users;
 SELECT `u_name`, `email`, `experience`, `active`, `pwd`, `can_change_name` FROM users ORDER BY id ASC;
+SELECT `id`, `u_name`, `email`, `experience`, `active`, `pwd`, `can_change_name` FROM users WHERE u_name = 'nom_user' AND email = 'email_user';
+SELECT `id`, `u_name`, `email`, `experience`, `active`, `pwd`, `can_change_name` FROM users WHERE u_name = 'nom_user' AND email = 'email_user';
 -- -----------------------------------------------------------------------------------------------------------------------------
--- Create user  => 'can_change_name' = 0 (false)
+-- Create user  => 'can_change_name' = 0 (false) CHANGEMENT de PSEUDO non autorisé
 INSERT INTO `users` (`u_name`, `email`, `experience`, `active`, `pwd`, `can_change_name`) VALUES ('pseudo_user', 'email_user@boite-email.com', 0, 0,'password_haché', 0);
--- Create user sur invitation => 'can_change_name' = 1 (true)
+-- Create user sur invitation => 'can_change_name' = 1 (true) CHANGEMENT de PSEUDO autorisé
 INSERT INTO `users` (`u_name`, `email`, `experience`, `active`, `pwd`, `can_change_name`) VALUES ('pseudo_user', 'email_user@boite-email.com', 0, 0,'password_est_adresse_email', 1);
 -- -----------------------------------------------------------------------------------------------------------------------------
--- Update user profil	=> 'can_change_name' = 0 (false)
+-- Update user profil	=> 'can_change_name' = 0 (false) CHANGEMENT de PSEUDO non autorisé
 UPDATE users SET 
 `email` = 'nouvel_email', 
 `experience` = 'Nouvelle_expérience', 
@@ -138,7 +141,7 @@ UPDATE users SET
 WHERE id = 'identifiant_utilisateur'
 AND active = 1; /* 0 - compte inactif (false) ... 1 - compte actif (true)*/
 -- -----------------------------------------------------------------------------------------------------------------------------
--- Update user profil	=> 'can_change_name' = 1 (true)
+-- Update user profil	=> 'can_change_name' = 1 (true) CHANGEMENT de PSEUDO autorisé
 UPDATE users SET 
 `u_name` = 'nouveau_pseudo', 
 `email` = 'nouvel_email', 
