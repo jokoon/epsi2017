@@ -1,0 +1,6 @@
+CREATE FUNCTION `new_experience` ()
+RETURNS INTEGER
+BEGIN
+
+RETURN 1;
+END

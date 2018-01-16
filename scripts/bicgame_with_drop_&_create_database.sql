@@ -1276,7 +1276,7 @@ INSERT INTO users (id, u_name, email, experience, active, pwd, can_change_name) 
 INSERT INTO users (id, u_name, email, experience, active, pwd, can_change_name) VALUES (42, 'chemisse', 'chemisse@boite-email.com', 2, 1,'', 1);
 INSERT INTO users (id, u_name, email, experience, active, pwd, can_change_name) VALUES (43, 'bi', 'bi@boite-email.com', 3, 1,'', 1);
 INSERT INTO users (id, u_name, email, experience, active, pwd, can_change_name) VALUES (44, 'gleux', 'gleux@boite-email.com', 4, 1,'', 1);
-INSERT INTO users (id, u_name, email, experience, active, pwd, can_change_name) VALUES (45, 'moutarde', '@boite-email.com', 5, 1,'', 1);
+INSERT INTO users (id, u_name, email, experience, active, pwd, can_change_name) VALUES (45, 'moutarde', 'moutarde@boite-email.com', 5, 1,'', 1);
 INSERT INTO users (id, u_name, email, experience, active, pwd, can_change_name) VALUES (46, 'deux', 'deux@boite-email.com', 6, 1,'', 1);
 INSERT INTO users (id, u_name, email, experience, active, pwd, can_change_name) VALUES (47, 'maux', 'maux@boite-email.com', 7, 1,'', 1);
 INSERT INTO users (id, u_name, email, experience, active, pwd, can_change_name) VALUES (48, 'see', 'see@boite-email.com', 8, 1,'', 1);
