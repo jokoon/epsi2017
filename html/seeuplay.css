@@ -19,20 +19,50 @@
 }
 
 .field01{
-    width:100px;
+    width:200px;
 }
 .pres_jeux{
+    margin:0 auto;
+    width:65%;
+}
+
+.pres_btn{
     margin:0 auto;
     width:90%;
 }
 
 .img_jeu{
     display:inline-block;
-    width:24%;
+    width:32%;
 }
 .img_jeu2{
     width:100%;
 }
 .bt_jeux{
-    width:32%;
+    width:30%;
+}
+
+#hicontainer{
+    display:none;
+    position:absolute;
+    top:25%;
+    right:40%;
+    padding:20px;
+    background-color:orange;
+    border-radius:20px;
+    text-align: center;
+    box-shadow: 10px 10px;
+}
+
+.rules{
+    display:none;
+    position:absolute;
+    width:50%;
+    top:40%;
+    right:25%;
+    padding:20px;
+    background-color:orange;
+    border-radius:20px;
+    text-align: center;
+    box-shadow: 10px 10px;
 }
