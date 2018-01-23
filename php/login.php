@@ -1,4 +1,5 @@
 <?php
+	include("utilities.php");
 	if(isset($_SESSION['login']))
 	{
 		if(isset($_GET['logout']))
@@ -12,15 +13,15 @@
 			echo '<a href=".?logout">logout</a>';
 		}
 	}
-	else
-	if(isset($_POST['password']) and isset($_POST['login']))
+	else if(isset($_POST['pwd']) and isset($_POST['login']))
 	{
-		$h = hash('sha256', $_POST['password']);
-		// $bdd = new PDO('mysql:host=localhost;dbname=bicgame', 'root', '', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
-		$bdd = new PDO('mysql:host=mysql.montpellier.epsi.fr:3306;dbname=bicgame', 'jonas.orinovski', 'bicgame', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+		$h = hash('sha256', $_POST['pwd']);
+		$bdd = new PDO('mysql:host=localhost:3306;dbname=bicgame', 'root', '', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+		// $db = new PDO('mysql:host=mysql.montpellier.epsi.fr:5206;dbname=bicgame', 'jonas.orinovski', 'bicgame', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+		$login = $_POST['login'];
 		try
 		{
-			$reponse = $bdd->query('SELECT * FROM users WHERE name = \''.$_POST['login'].'\'');
+			$reponse = $db->query("SELECT * FROM users WHERE u_name = '$login'");
 		}
 		catch(Exception $e)
 		{
@@ -29,9 +30,13 @@
 			// print_r($bdd->errorInfo());
 			print_r($e->getMessage());
 		}
-		if ($donnees = $reponse->fetch())
+		if($reponse === false)
 		{
-			if($donnees['password'] == hash('sha256',$_POST['password']))
+			echo "this user doesn't exist!";
+		}
+		else if ($donnees = $reponse->fetch())
+		{
+			if($donnees['pwd'] == hash('sha256',$_POST['pwd']))
 			{
 				if($donnees['active'] == FALSE)
 				{
@@ -46,14 +51,19 @@
 			else echo 'bad password!';
 		}
 	}
+	else if(isset($_GET['create_account']))
+	{
+		include("create_account.php");
+	}
 	else
 	{
-		echo '<a href="./create_account.php">creer compte</a>';
 		// echo '<p>creez un compte:</p>';
-		echo "<form method='POST' action=".$_SERVER['PHP_SELF'].">";
-		echo "login:<input type='text' name='login' value=".hasform_post('login')."></input>";
-		echo "password:<input type='password' name='password'></input>";
-		echo "<input type='submit' name='valider' value='OK'/>";
-		echo "</form>";
+		// echo '<form method="POST" action="'.$_SERVER['PHP_SELF'].'">';
+		echo '<form method="POST" action="/bicgame/home.php">';
+		echo 	'<input class="field01" type="text" name="login" value="'.hasform_post('login').'" placeholder="login"></input><br/>';
+		echo 	'<input class="field01" type="password" name="password" placeholder="password"></input><br/>';
+		echo 	'<input type="submit" name="valider" value="OK"/><br/>';
+		echo '</form>';
+		echo '<a href="./home.php?create_account">creer compte</a>';
 	}
 ?>

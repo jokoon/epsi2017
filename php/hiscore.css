@@ -1,0 +1,14 @@
+tr:nth-child(even) {
+    background: rgb(9, 174, 240)
+}
+tr:nth-child(odd) {
+    background: #FFF
+}
+tr:nth-child(6) {
+    background: orange;
+}
+
+#hiscore{
+    width: 40%;
+    margin: 0 auto;
+}
