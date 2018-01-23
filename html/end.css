@@ -1,0 +1,22 @@
+*{
+    margin:0;
+    padding:0;
+}
+
+.pres_end{
+    display: block;
+    margin-left: auto;
+    margin-right: auto
+}
+
+.pres_text{
+    text-align: center ;
+}
+
+.my_form {
+    display: block;
+    text-align: center;
+    width: 40%;
+    margin: 0 auto;
+}
+
