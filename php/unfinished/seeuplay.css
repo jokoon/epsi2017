@@ -1,0 +1,68 @@
+*{
+    margin:0;
+    padding:0;
+}
+
+#img_home{
+    margin:0;
+    padding:0;
+}
+#form01{
+    display:inline-block;
+    position: absolute;
+    padding:20px;
+    top:0;
+    right:0;
+    border-radius:20px;
+    background-color:rgba(255, 162, 0, 0.432);
+    width:24%;
+}
+
+.field01{
+    width:200px;
+}
+.pres_jeux{
+    margin:0 auto;
+    width:65%;
+}
+
+.pres_btn{
+    margin:0 auto;
+    width:90%;
+}
+
+.img_jeu{
+    display:inline-block;
+    width:32%;
+}
+.img_jeu2{
+    width:100%;
+}
+.bt_jeux{
+    width:30%;
+}
+
+#hicontainer{
+    display:none;
+    position:absolute;
+    top:25%;
+    right:40%;
+    padding:20px;
+    background-color:orange;
+    border-radius:20px;
+    text-align: center;
+    box-shadow: 10px 10px;
+}
+
+.rules{
+    display:none;
+    position:absolute;
+    width:50%;
+    top:40%;
+    right:25%;
+    padding:20px;
+    background-color:orange;
+    border-radius:20px;
+    text-align: center;
+    box-shadow: 10px 10px;
+}
