@@ -1,9 +1,11 @@
 package jkp.com.cocktail;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.widget.ArrayAdapter;
+import android.view.View;
 import android.widget.ListView;
+import android.widget.Toast;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -27,19 +29,27 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        listRecipies = (ListView) findViewById(R.id.lstVRecipe);
-
-        //android.R.layout.simple_list_item_1 est une vue disponible de base dans le SDK android,
-        //Contenant une TextView avec comme identifiant "@android:id/text1"
-
-        final ArrayAdapter<String> adapter = new ArrayAdapter<String>(MainActivity.this,
-                android.R.layout.simple_list_item_1, Recipies);
-        listRecipies.setAdapter(adapter);
+//        listRecipies = (ListView) findViewById(R.id.lstVRecipe);
+//
+//        //android.R.layout.simple_list_item_1 est une vue disponible de base dans le SDK android,
+//        //Contenant une TextView avec comme identifiant "@android:id/text1"
+//
+//        final ArrayAdapter<String> adapter = new ArrayAdapter<String>(MainActivity.this,
+//                android.R.layout.simple_list_item_1, Recipies);
+//        listRecipies.setAdapter(adapter);
     }
 
     public void addRecipe (){
         // TODO : Gérer l'ajout d'un élément dans la liste du tableau
     }
+
+    public void button_touched(View button){
+//        Toast.makeText(this, String.valueOf(button.getId())+"3221222", Toast.LENGTH_SHORT);
+        Intent activintent = new Intent(this, activity_recette.class);
+//        activintent.putExtra("somekey", 12);
+        startActivity(activintent);
+    }
+
 
 }
 
