@@ -13,6 +13,14 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import io.realm.Realm;
+import io.realm.RealmObject;
+import io.realm.RealmResults;
+//import io.realm.*;
+
+
+
+
 public class listetruc extends AppCompatActivity {
 
     RecyclerView ui_recycler_recette;
@@ -26,6 +34,7 @@ public class listetruc extends AppCompatActivity {
         ui_recycler_recette = findViewById(R.id.recycler_recipes);
         ui_recycler_recette.setLayoutManager(new LinearLayoutManager(this));
 
+
         adapter = new recette_adapter();
         ui_recycler_recette.setAdapter(adapter);
         my_this = this;
@@ -35,8 +44,20 @@ public class listetruc extends AppCompatActivity {
         adapter.add_recipe();
     }
 
+
     class recette_adapter extends RecyclerView.Adapter<recette_adapter.recette_holder> {
         ArrayList<String> recettes = new ArrayList<>();
+        RealmResults<recipe> recipe_list;
+        public recette_adapter()
+        {
+            Realm realm = Realm.getDefaultInstance();
+            realm.beginTransaction();
+            realm.copyToRealm(new recipe("djarabou au pouet", 432));
+            realm.copyToRealm(new recipe("tagada a la jean roger", 611));
+            realm.copyToRealm(new recipe("patatadodo au soupir", 1));
+            realm.copyToRealm(new recipe("youplababadoba a la troupilette", 99));
+            realm.commitTransaction();
+        }
 
         public void add_recipe() {
             recettes.add("");
@@ -46,6 +67,13 @@ public class listetruc extends AppCompatActivity {
         void removeRow(int index) {
             recettes.remove(index);
             notifyItemRemoved(index);
+        }
+        void removewithrealm(recipe recp)
+        {
+            Realm realm = Realm.getDefaultInstance();
+            realm.beginTransaction();
+            recp.deleteFromRealm();
+            realm.commitTransaction();
         }
 
         @Override

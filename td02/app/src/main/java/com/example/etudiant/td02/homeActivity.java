@@ -13,6 +13,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import io.realm.Realm;
+
 public class homeActivity extends AppCompatActivity {
     private EditText myEnterText;
     private TextView myRenderText;
@@ -26,6 +28,9 @@ public class homeActivity extends AppCompatActivity {
         myRenderText=findViewById(R.id.idRenderText);
         String strText=loadPreferences();
         myRenderText.setText(strText);
+
+        Realm.init(this);
+
 
     }
     public void buttonClicked(View button){

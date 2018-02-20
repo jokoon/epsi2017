@@ -5,6 +5,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -62,11 +64,7 @@ public class RecipeEdit extends AppCompatActivity {
 
         @Override
         public void onBindViewHolder(recette_holder holder, int position) {
-//            if (ingredients.get(position).equals(""))
-//                holder.ui_titlelabel.setText("<no name, please edit>");
-//            else
-//                holder.ui_titlelabel.setText(ingredients.get(position));
-//            holder.ui_categorylabel.setText("");
+            holder.ui_ingredient.setText(ingredients.get(position));
         }
 
         @Override
@@ -75,8 +73,7 @@ public class RecipeEdit extends AppCompatActivity {
         }
 
         class recette_holder extends RecyclerView.ViewHolder
-                implements View.OnClickListener, EditText.OnFocusChangeListener
-        {
+                implements View.OnClickListener, EditText.OnFocusChangeListener, TextWatcher {
 //            private final TextView ui_titlelabel, ui_categorylabel;
             private final EditText ui_ingredient;
 //            ingredient_adapter creator;
@@ -92,6 +89,7 @@ public class RecipeEdit extends AppCompatActivity {
 //                Button editButton = itemView.findViewById(R.id.editButton);
 //                editButton.setOnClickListener(this);
                 ui_ingredient.setOnFocusChangeListener(this);
+                ui_ingredient.addTextChangedListener(this);
             }
 
             @Override
@@ -106,6 +104,21 @@ public class RecipeEdit extends AppCompatActivity {
 //                    ingredients.set(getAdapterPosition(), ((EditText)view).getText().toString());
                     Log.d("what", ""+getAdapterPosition());
                 }
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                ingredients.set(getAdapterPosition(),editable.toString());
             }
         }
     }
