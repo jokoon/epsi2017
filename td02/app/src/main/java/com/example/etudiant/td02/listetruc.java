@@ -14,11 +14,9 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import io.realm.Realm;
+import io.realm.RealmList;
 import io.realm.RealmObject;
 import io.realm.RealmResults;
-//import io.realm.*;
-
-
 
 
 public class listetruc extends AppCompatActivity {
@@ -26,6 +24,7 @@ public class listetruc extends AppCompatActivity {
     RecyclerView ui_recycler_recette;
     listetruc my_this;
     recette_adapter  adapter;
+//    RealmList<Recipe>
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,19 +43,19 @@ public class listetruc extends AppCompatActivity {
         adapter.add_recipe();
     }
 
-
+    ///////// adapter /////////
     class recette_adapter extends RecyclerView.Adapter<recette_adapter.recette_holder> {
         ArrayList<String> recettes = new ArrayList<>();
         RealmResults<recipe> recipe_list;
         public recette_adapter()
         {
-            Realm realm = Realm.getDefaultInstance();
-            realm.beginTransaction();
-            realm.copyToRealm(new recipe("djarabou au pouet", 432));
-            realm.copyToRealm(new recipe("tagada a la jean roger", 611));
-            realm.copyToRealm(new recipe("patatadodo au soupir", 1));
-            realm.copyToRealm(new recipe("youplababadoba a la troupilette", 99));
-            realm.commitTransaction();
+//            Realm realm = Realm.getDefaultInstance();
+//            realm.beginTransaction();
+//            realm.copyToRealm(new recipe("djarabou au pouet", 432));
+//            realm.copyToRealm(new recipe("tagada a la jean roger", 611));
+//            realm.copyToRealm(new recipe("patatadodo au soupir", 1));
+//            realm.copyToRealm(new recipe("youplababadoba a la troupilette", 99));
+//            realm.commitTransaction();
         }
 
         public void add_recipe() {
@@ -74,13 +73,13 @@ public class listetruc extends AppCompatActivity {
             realm.beginTransaction();
             recp.deleteFromRealm();
             realm.commitTransaction();
+
         }
 
         @Override
         public recette_holder onCreateViewHolder(ViewGroup parent, int viewType) {
             View cell = LayoutInflater.from(parent.getContext()).inflate(R.layout.recette_cell, parent, false);
             recette_holder holder = new recette_holder(cell);
-//            recettes = new ArrayList<>();
             return holder;
         }
 
@@ -98,10 +97,9 @@ public class listetruc extends AppCompatActivity {
             return recettes.size();
         }
 
+        ///////// holder /////////
         class recette_holder extends RecyclerView.ViewHolder implements View.OnClickListener {
             private final TextView ui_titlelabel, ui_categorylabel;
-
-//            recette_adapter creator;
 
             public recette_holder(View itemView) {
                 super(itemView);

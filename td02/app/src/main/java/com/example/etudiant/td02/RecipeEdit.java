@@ -47,6 +47,9 @@ public class RecipeEdit extends AppCompatActivity {
         public void add_ingredient() {
             ingredients.add("");
             notifyItemInserted(ingredients.size() - 1);
+
+            // todo
+            // check if the last line is empty when adding an ingredient
         }
 
         void removeRow(int index) {
@@ -95,6 +98,7 @@ public class RecipeEdit extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 removeRow(getAdapterPosition());
+
             }
 
             @Override
@@ -119,6 +123,9 @@ public class RecipeEdit extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable editable) {
                 ingredients.set(getAdapterPosition(),editable.toString());
+                // todo
+                // check if line is empty, and call removerow
+                //
             }
         }
     }
